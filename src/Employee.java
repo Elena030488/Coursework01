@@ -41,6 +41,7 @@ public class Employee {
     public void setSalary(double salary) {
         this.salary = salary;
     }
+
     @Override
     public String toString() {
         return "ID работника: " + this.id + ", ФИО: " + this.employeeLastName + " " + this.employeeFirstName + " " + this.employeeMiddleName + ", отдел: " + this.department + ", зарплата: " + this.salary;
@@ -58,5 +59,13 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(employeeFirstName, employeeMiddleName, employeeLastName, department, salary, id);
     }
+
+    public boolean equalsFIO(String lastName, String firstName, String middleName) {
+        if (getEmployeeLastName().equalsIgnoreCase(lastName) && getEmployeeFirstName().equalsIgnoreCase(firstName) && getEmployeeMiddleName().equalsIgnoreCase(middleName)) {
+            return true;
+        }
+        return false;
+    }
+
 }
 

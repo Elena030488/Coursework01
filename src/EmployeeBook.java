@@ -53,11 +53,10 @@ public class EmployeeBook {
     public Employee salaryMinEmployeeDepartment(int department) {
         Employee min = null;
         for (Employee employee : employees) {
-            if (employee.getDepartment() != department) {
-                continue;
-            }
-            if (min == null || employee.getSalary() < min.getSalary()) {
-                min = employee;
+            if (employee.getDepartment() == department) {
+                if (min == null || employee.getSalary() < min.getSalary()) {
+                    min = employee;
+                }
             }
         }
         return min;
@@ -66,11 +65,10 @@ public class EmployeeBook {
     public Employee salaryMaxEmployeeDepartment(int department) {
         Employee max = null;
         for (Employee employee : employees) {
-            if (employee.getDepartment() != department) {
-                continue;
-            }
-            if (max == null || employee.getSalary() > max.getSalary()) {
-                max = employee;
+            if (employee.getDepartment() == department) {
+                if (max == null || employee.getSalary() > max.getSalary()) {
+                    max = employee;
+                }
             }
         }
         return max;
@@ -144,23 +142,21 @@ public class EmployeeBook {
 
     public void deleteEmployee(String lastName, String firstName, String middleName) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) {
-                continue;
-            }
-            if (employees[i].getEmployeeLastName().equalsIgnoreCase(lastName) && employees[i].getEmployeeFirstName().equalsIgnoreCase(firstName) && employees[i].getEmployeeMiddleName().equalsIgnoreCase(middleName)) {
-                employees[i] = null;
-                break;
+            if (employees[i] != null) {
+                if (employees[i].equalsFIO(lastName, firstName, middleName)) {
+                    employees[i] = null;
+                    break;
+                }
             }
         }
     }
     public void changeSalary(String lastName, String firstName, String middleName, double changedSalary) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) {
-                continue;
-            }
-            if (employees[i].getEmployeeLastName().equalsIgnoreCase(lastName) && employees[i].getEmployeeFirstName().equalsIgnoreCase(firstName) && employees[i].getEmployeeMiddleName().equalsIgnoreCase(middleName)) {
-                employees[i].setSalary(changedSalary);
-                break;
+            if (employees[i] != null) {
+                if (employees[i].equalsFIO(lastName, firstName, middleName)) {
+                    employees[i].setSalary(changedSalary);
+                    break;
+                }
             }
         }
     }
@@ -169,7 +165,7 @@ public class EmployeeBook {
             if (employees[i] == null) {
                 continue;
             }
-            if (employees[i].getEmployeeLastName().equalsIgnoreCase(lastName) && employees[i].getEmployeeFirstName().equalsIgnoreCase(firstName) && employees[i].getEmployeeMiddleName().equalsIgnoreCase(middleName)) {
+            if (employees[i].equalsFIO(lastName, firstName, middleName)) {
                 employees[i].setDepartment(changedDepartment);
                 break;
             }
@@ -177,11 +173,10 @@ public class EmployeeBook {
     }
     public void printDepartmentsEmployeesFullName(int department) {
         for (Employee employee : employees) {
-            if (employee == null) {
-                continue;
-            }
-            if (employee.getDepartment() == department) {
-                System.out.println(employee.getEmployeeLastName() + " " + employee.getEmployeeFirstName() + " " + employee.getEmployeeMiddleName());
+            if (employee != null) {
+                if (employee.getDepartment() == department) {
+                    System.out.println(employee.getEmployeeLastName() + " " + employee.getEmployeeFirstName() + " " + employee.getEmployeeMiddleName());
+                }
             }
         }
     }
